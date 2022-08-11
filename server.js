@@ -1,3 +1,5 @@
+const dotenv= require ('dotenv')
+const colors = require ('colors')
 const express = require("express")
 const app = express()
 const path = require("path")
@@ -7,8 +9,7 @@ const cookieParser = require('cookie-parser')
 const cors = require("cors") 
 const corsOptions = require("./config/corsOptions")
 const PORT = process.env.PORT || 3500 
-const dotenv= require ('dotenv')
-const colors = require ('colors')
+
 
 app.use(logger)
 
@@ -34,7 +35,8 @@ app.use('/',express.static(path.join(__dirname, 'public')))
 
 
 app.use('/', require('./routes/root'))
-
+app.use('/users', require('./routes/userRoutes'))
+app.use('/notes', require('./routes/noteRoutes'))
 
 
 app.all('*', (req, res) => {
